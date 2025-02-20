@@ -7,13 +7,13 @@ import { Home, MessageSquare, User } from "lucide-react"
 export function FloatingNavDemo() {
   const navItems = [
     {
-      name: "Home",
+      name: "Inicio",
       link: "/",
       icon: <Home className="h-4 w-4 text-neutral-500 dark:text-white" />,
     },
     {
-      name: "About",
-      link: "/about",
+      name: "Dashboard",
+      link: "/dashboard",
       icon: <User className="h-4 w-4 text-neutral-500 dark:text-white" />,
     },
     {

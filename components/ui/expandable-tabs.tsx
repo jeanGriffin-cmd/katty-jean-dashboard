@@ -56,7 +56,6 @@ export function ExpandableTabs({
 }: ExpandableTabsProps) {
   const [selected, setSelected] = React.useState<number | null>(null);
   const outsideClickRef = React.useRef<HTMLDivElement>(null!);
-
   useOnClickOutside(outsideClickRef, () => {
     setSelected(null);
     onChange?.(null);
@@ -80,14 +79,17 @@ export function ExpandableTabs({
       )}
     >
       {tabs.map((tab, index) => {
+        // Explicitly narrow the type using a type guard
         if (tab.type === "separator") {
           return <Separator key={`separator-${index}`} />;
         }
 
-        const Icon = tab.icon;
+        // TypeScript now knows that `tab` is of type `Tab`
+        const Icon = (tab as Tab).icon;
+
         return (
           <motion.button
-            key={tab.title}
+            key={(tab as Tab).title}
             variants={buttonVariants}
             initial={false}
             animate="animate"
@@ -112,7 +114,7 @@ export function ExpandableTabs({
                   transition={transition}
                   className="overflow-hidden"
                 >
-                  {tab.title}
+                  {(tab as Tab).title}
                 </motion.span>
               )}
             </AnimatePresence>

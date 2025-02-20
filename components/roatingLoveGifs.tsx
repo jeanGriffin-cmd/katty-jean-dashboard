@@ -3,30 +3,27 @@ import { Card } from '@/components/ui/card';
 
 const RotatingGifs = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const gifCount = 18;
 
-  // Define the number of GIFs in your folder
-  const gifCount = 18; // Assuming you have 5 GIFs: gifCat (1).gif to gifCat (5).gif
-
-  // Generate an array of GIF URLs dynamically
   const content = Array.from({ length: gifCount }, (_, index) => ({
     gifUrl: `/gifs/gifCat (${index + 1}).gif`,
   }));
 
   useEffect(() => {
     const timer = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * content.length); // Generate a random index
+      const randomIndex = Math.floor(Math.random() * content.length);
       setCurrentIndex(randomIndex);
-    }, 3000); // Change GIF every 3 seconds
+    }, 3000);
 
     return () => clearInterval(timer);
-  }, []); // Empty dependency array ensures this runs only once
+  }, []);
 
   return (
-    <div className="relative w-full max-w-md mx-auto">
+    <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto">
       <div className="absolute inset-0 bg-gradient-to-r blur-xl rounded-lg" />
 
-      <Card className="relative overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6">
-        <div className="flex flex-col items-center space-y-4">
+      <Card className="relative overflow-hidden backdrop-blur-sm p-3 sm:p-4 md:p-6 bg-background/20">
+        <div className="flex flex-col items-center">
           <div className="w-full aspect-square relative overflow-hidden rounded-lg">
             {content.map((item, index) => (
               <div
